@@ -1,0 +1,108 @@
+<!--/* Copyright ? 2003-2011 Rustici Software, LLC  All Rights Reserved. www.scorm.com - See LICENSE.txt for usage restrictions */-->
+<HTML>
+	<HEAD>
+		<TITLE>myLearning Module</TITLE>
+		
+		<script>
+			var g_biOS = (navigator.userAgent.indexOf("AppleWebKit/") > -1 && navigator.userAgent.indexOf("Mobile/") > -1);
+						
+			if (g_biOS)
+{
+	if (g_bUseMobilePlayer && g_biPad)
+	{
+		// Switch to TinCan for AO Reporting
+		if (g_bAOSupport)
+		{
+			g_bTinCan = true;
+		}
+		
+		if (g_bTinCan)
+		{
+			var strQuery = "tincan=" + g_bTinCan + "&" + document.location.search.substr(1);
+			
+			if (g_bAOSupport)
+			{
+				strQuery = "aosupport=true&" + strQuery;
+				g_bAOSupport = false;
+			}
+			
+			location.replace("ioslaunch.html#" + strQuery);
+		}
+		else
+		{
+			location.replace("ioslaunch.html");
+		}
+	}
+	else if (g_bUseHtml5)
+	{
+		var strLocation = "story_html5.html";
+		
+		if (g_bTinCan)
+		{
+			strLocation += "?tincan=" + g_bTinCan + "&" + document.location.search.substr(1);
+		}
+		else if (g_bLMS)
+		{
+			strLocation += "?lms=1";
+			
+			if (g_bWarnOnCommitFail)
+			{
+				strLocation += "&warncommit=1";
+			}
+		}
+		
+		location.replace(strLocation);	
+	}
+}
+else if (!g_bMinFlash && g_bUseHtml5)
+{
+	var strLocation = "story_html5.html";
+	
+	if (g_bTinCan)
+	{
+		strLocation += "?tincan=" + g_bTinCan + "&" + document.location.search.substr(1);
+	}	
+	else if (g_bLMS)
+	{
+		strLocation += "?lms=1";
+		
+		if (g_bWarnOnCommitFail)
+		{
+			strLocation += "&warncommit=1";
+		}
+	}
+	
+	location.replace(strLocation);	
+}
+		</script>
+		
+		<script src="lms/APIConstants.js" type="text/javascript" charset="utf-8"></script>
+		<script src="lms/Configuration.js" type="text/javascript" charset="utf-8"></script>
+		<script src="lms/UtilityFunctions.js" type="text/javascript" charset="utf-8"></script>
+		<script src="lms/SCORM2004Functions.js" type="text/javascript" charset="utf-8"></script>
+		<script src="lms/SCORMFunctions.js" type="text/javascript" charset="utf-8"></script>
+		<script src="lms/AICCFunctions.js" type="text/javascript" charset="utf-8"></script>
+		<script src="lms/NONEFunctions.js" type="text/javascript" charset="utf-8"></script>
+		<script src="lms/LMSAPI.js" type="text/javascript" charset="utf-8"></script>
+		<script src="lms/API.js" type="text/javascript" charset="utf-8"></script>
+
+		<script language="JavaScript1.2">
+		
+		strContentLocation = "story.html";  //Put the link to the start of the content here.
+		//strContentLocation = "TestAllFunctions.htm";
+		
+		function LoadContent(){
+			window.scormdriver_content.document.location.href = strContentLocation;
+		}
+		</script>
+	</HEAD>
+	<frameset rows="100%,0%,0%,0%" onLoad="Start()" border="0" onbeforeunload="Unload()" onUnload="Unload()">
+		<frame name="scormdriver_content" src="lms/blank.html" scrolling="false">
+		<frame name="AICCComm" src="lms/AICCComm.html">
+		<frame name="rusticisoftware_aicc_results" src="lms/blank.html">
+		<frame name="NothingFrame" src="lms/blank.html">
+	</frameset>
+<noframes>
+		Your browser must be able to view frames for this content to display.
+	</noframes>
+</HTML>
