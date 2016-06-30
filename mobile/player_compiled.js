@@ -32831,6 +32831,7 @@ if (player.isMobile || player.isMobileMarkers)
 player.forceBitMaskTesting = -1 < location.search.indexOf("&pixel=");
 player.isLocalFileSystem = "file:" == window.location.protocol;
 player.usePixelTesting = (player.isMobile || !player.isLocalFileSystem) && !player.forceBitMaskTesting;
+player.usePixelTesting = false;
 if (player.usePixelTesting)
     VectorShape.prototype.isPointActive = function(a, b) {
         if (!this.visible)
